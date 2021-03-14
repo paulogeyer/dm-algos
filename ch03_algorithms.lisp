@@ -1,4 +1,5 @@
 (defun lst-max (lst)
+  "get max element from list"
   (let ((max (first lst)))
     (loop for element in lst do
 	 (if (> element max)
@@ -44,3 +45,14 @@
 	 (setf (nth i lst) m)))
   lst)
 
+(defun change (n)
+  "greedy algorithm for finding the change for n cents"
+  (let ((coins '(25 10 5 1))
+	(change-coins '()))
+    (loop for i from 0 upto (1- (length coins)) do
+	 (progn 
+	   (do ()
+	       ((< n (nth i coins)))
+	     (push (nth i coins) change-coins)
+	     (setq n (- n (nth i coins))))))
+    (reverse change-coins)))
